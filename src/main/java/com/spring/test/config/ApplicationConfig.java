@@ -39,9 +39,11 @@ public class ApplicationConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
         Properties properties = new Properties();
-        properties.put("hibernate.format_sql", "true");
-        properties.put("hibernate.generate_statistics", "true");
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+        properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+        properties.put("hibernate.generate_statistics",
+                env.getProperty("hibernate.generate_statistics"));
+        properties.put("hibernate.hbm2ddl.auto",
+                env.getProperty("hibernate.hbm2ddl.auto"));
         factoryBean.setHibernateProperties(properties);
         factoryBean.setAnnotatedClasses(User.class);
         return factoryBean;
