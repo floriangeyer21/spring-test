@@ -18,19 +18,19 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "com.spring.test.service"
 })
 public class ApplicationConfig {
-    private final Environment env;
+    private final Environment environment;
 
-    public ApplicationConfig(Environment env) {
-        this.env = env;
+    public ApplicationConfig(Environment environment) {
+        this.environment = environment;
     }
 
     @Bean
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getProperty("db.driver"));
-        dataSource.setUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.username"));
-        dataSource.setPassword(env.getProperty("db.password"));
+        dataSource.setDriverClassName(environment.getProperty("db.driver"));
+        dataSource.setUrl(environment.getProperty("db.url"));
+        dataSource.setUsername(environment.getProperty("db.username"));
+        dataSource.setPassword(environment.getProperty("db.password"));
         return dataSource;
     }
 
@@ -39,11 +39,12 @@ public class ApplicationConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
         Properties properties = new Properties();
-        properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+        properties.put("hibernate.format_sql",
+                environment.getProperty("hibernate.format_sql"));
         properties.put("hibernate.generate_statistics",
-                env.getProperty("hibernate.generate_statistics"));
+                environment.getProperty("hibernate.generate_statistics"));
         properties.put("hibernate.hbm2ddl.auto",
-                env.getProperty("hibernate.hbm2ddl.auto"));
+                environment.getProperty("hibernate.hbm2ddl.auto"));
         factoryBean.setHibernateProperties(properties);
         factoryBean.setAnnotatedClasses(User.class);
         return factoryBean;
