@@ -6,16 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
-@Builder
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -28,5 +20,81 @@ public class User {
     private String email;
 
     private String password;
+
+    public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", email='" + email + '\''
+                + ", password='" + password + '\''
+                + '}';
+    }
+
+    public static Builder builder() {
+        return new User().new Builder();
+    }
+
+    public class Builder {
+        private User user;
+
+        private Builder() {
+            user = new User();
+        }
+
+        public Builder setName(String name) {
+            user.name = name;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            user.email = email;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            user.password = password;
+            return this;
+        }
+
+        public User build() {
+            return user;
+        }
+    }
 }
 

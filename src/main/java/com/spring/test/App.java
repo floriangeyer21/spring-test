@@ -15,13 +15,13 @@ public class App {
                 new AnnotationConfigApplicationContext(ApplicationConfig.class);
         UserService userService = context.getBean(UserService.class);
 
-        userService.add(User.builder().name("Alice")
-                .email("alicebetterthanbob@gmail.com")
-                .password("12345")
+        userService.add(User.builder().setName("Alice")
+                .setEmail("alicebetterthanbob@gmail.com")
+                .setPassword("12345")
                 .build());
-        userService.add(User.builder().name("Bob")
-                .email("bobdisagree@gmail.com")
-                .password("12345")
+        userService.add(User.builder().setName("Bob")
+                .setEmail("bobdisagree@gmail.com")
+                .setPassword("12345")
                 .build());
 
         userService.listUsers().forEach(log::info);

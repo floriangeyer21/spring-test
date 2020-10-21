@@ -56,4 +56,15 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException("Can't retrieve list of users ", e);
         }
     }
+
+    @Override
+    public User getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            User user = session.get(User.class, id);
+            log.info("Successfully retrieve user by id: " + id);
+            return user;
+        } catch (Exception e) {
+            throw new RuntimeException("Can't retrieve user by id: " + id);
+        }
+    }
 }
