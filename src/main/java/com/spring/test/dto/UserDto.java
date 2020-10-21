@@ -1,35 +1,11 @@
-package com.spring.test.domain;
+package com.spring.test.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class UserDto {
     private String name;
-
-    @Column(unique = true, nullable = false)
     private String email;
-
     private String password;
 
-    public User() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    private UserDto() {
     }
 
     public String getName() {
@@ -58,43 +34,42 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{"
-                + "id=" + id
-                + ", name='" + name + '\''
+        return "UserDto{"
+                + "name='" + name + '\''
                 + ", email='" + email + '\''
                 + ", password='" + password + '\''
                 + '}';
     }
 
-    public static Builder builder() {
-        return new User().new Builder();
+    public static Builder newBuilder() {
+        return new UserDto().new Builder();
     }
 
     public class Builder {
-        private User user;
+        private UserDto userDto;
 
-        private Builder() {
-            user = new User();
+        public Builder() {
+            userDto = new UserDto();
         }
 
         public Builder setName(String name) {
-            user.name = name;
+            userDto.name = name;
             return this;
         }
 
         public Builder setEmail(String email) {
-            user.email = email;
+            userDto.email = email;
             return this;
         }
 
         public Builder setPassword(String password) {
-            user.password = password;
+            userDto.password = password;
             return this;
         }
 
-        public User build() {
-            return user;
+        public UserDto build() {
+            return userDto;
         }
+
     }
 }
-

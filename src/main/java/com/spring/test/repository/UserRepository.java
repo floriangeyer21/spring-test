@@ -7,4 +7,6 @@ public interface UserRepository {
     User add(User user);
 
     List<User> listUsers();
+
+    User getById(Long id);
 }
