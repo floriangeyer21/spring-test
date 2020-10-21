@@ -64,7 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
             log.info("Successfully retrieve user by id: " + id);
             return user;
         } catch (Exception e) {
-            throw new RuntimeException("Can't retrieve user by id: " + id);
+            throw new RuntimeException("Can't retrieve user by id: " + id, e);
         }
     }
 }
