@@ -3,8 +3,8 @@ package com.spring.test.controllers;
 import com.spring.test.domain.User;
 import com.spring.test.dto.UserDto;
 import com.spring.test.service.UserService;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,14 +39,11 @@ public class UserController {
         return convertUserToUserDto(user);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<UserDto> getAll() {
-        List<User> users = userService.listUsers();
-        List<UserDto> userDtoList = new ArrayList<>();
-        for (User user : users) {
-            userDtoList.add(convertUserToUserDto(user));
-        }
-        return userDtoList;
+        return userService.listUsers().stream()
+                .map(this::convertUserToUserDto)
+                .collect(Collectors.toList());
     }
 
     private UserDto convertUserToUserDto(User user) {
